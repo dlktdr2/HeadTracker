@@ -67,10 +67,10 @@ jobs:
           chmod +x ./linuxdeploy-plugin-qt-x86_64.AppImage
           ./linuxdeploy-x86_64.AppImage --plugin qt -e ../appdir/usr/bin/HeadTracker --appdir ../appdir --output appimage
 
-#      - name: Setup tmate session
-#        uses: mxschmitt/action-tmate@v3
-#        if: ${{ failure() }}
-#        timeout-minutes: 15
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ failure() }}
+        timeout-minutes: 25
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
