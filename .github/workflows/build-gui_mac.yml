@@ -63,11 +63,16 @@ jobs:
           cp -R gui/src/HeadTracker.app output/HeadTracker.app
           # cp gui/src/css/stylesheet.css output/HeadTracker.app/Contents/MacOs
           # cp gui/src/css/Background.svg output/HeadTracker.app/Contents/MacOs
+          
+      - name: Create DMG
+        working-directory: ${{github.workspace}}
+        run: |
+          hdiutil create -volname HeadTracker -srcfolder output/HeadTracker.app -ov -format UDZO output/HeadTracker.dmg
 
       - name: Notarize Release Build
         uses: lando/notarize-action@v2
         with:
-          product-path: "output/HeadTracker.app"
+          product-path: "output/HeadTracker.dmg"
           appstore-connect-username: ${{ secrets.APPLE_DEV_USERNAME }}
           appstore-connect-password: ${{ secrets.APPLE_DEV_PASSWORD }}
           appstore-connect-team-id: ${{ secrets.APPLE_TEAM_ID }}
